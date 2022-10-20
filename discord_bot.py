@@ -8,8 +8,8 @@ import time
 import data
 
 
-def check_mod(chanel_id):
-
+def check_mod(channel_id):
+    print("check_mod")
     guild_id = data.guild_id
     mod_role_id_list = data.mod_role_id_list
 
@@ -20,7 +20,7 @@ def check_mod(chanel_id):
     }
 
     get_message_url = "https://discord.com/api/v9/channels/{}/messages?limit=50".format(
-        chanel_id
+        channel_id
     )
     message_res = requests.get(url=get_message_url, headers=headr)
     message_content_list = json.loads(message_res.content)
@@ -62,20 +62,20 @@ def get_content():
     if data.script_mode_flg:
         return random.choice(data.script_text_list)
     else:
-        get_content_from_channel()
+        return get_content_from_channel()
 
 
 def get_content_from_channel():
-    channel_list = data.text_channel_id
+    channel_id = data.text_channel_id
     headr = {
         "Authorization": data.authorization,
         "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36",
     }
-    channel_id = random.choice(channel_list)
     url = "https://discord.com/api/v9/channels/{}/messages?limit=100".format(channel_id)
     res = requests.get(url=url, headers=headr)
     result = json.loads(res.content)
+
     result_list = []
     for context in result:
         if ("<") not in context["content"]:
@@ -83,12 +83,12 @@ def get_content_from_channel():
                 if ("http") not in context["content"]:
                     if ("?") not in context["content"]:
                         result_list.append(context["content"])
-
     return random.choice(result_list)
 
 
 def chat():
-    chanel_list = data.chanel_id_list
+
+    channel_list = data.channel_id_list
     authorization_list = data.authorization_list
     for authorization in authorization_list:
         header = {
@@ -96,8 +96,8 @@ def chat():
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36",
         }
-        for chanel_id in chanel_list:
-            if data.check_mod_flg and check_mod(chanel_id):
+        for channel_id in channel_list:
+            if data.check_mod_flg and check_mod(channel_id):
                 continue
 
             msg = {
@@ -105,7 +105,7 @@ def chat():
                 "nonce": "82329451214{}33232234".format(random.randrange(0, 1000)),
                 "tts": False,
             }
-            url = "https://discord.com/api/v9/channels/{}/messages".format(chanel_id)
+            url = "https://discord.com/api/v9/channels/{}/messages".format(channel_id)
             try:
                 res = requests.post(url=url, headers=header, data=json.dumps(msg))
                 print(res.content)
@@ -113,7 +113,7 @@ def chat():
                 print(Exception)
                 continue
 
-            if len(chanel_list) > 1:
+            if len(channel_list) > 1:
                 channel_sleep_time = random.randrange(
                     data.channel_sleep_time_min, data.channel_sleep_time_max
                 )
@@ -143,4 +143,3 @@ if __name__ == "__main__":
 
         except:
             pass
-        continue
