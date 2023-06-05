@@ -5,6 +5,7 @@ authorization_list = ["你的账号认证id"]
 authorization = "你的账号认证id"
 
 # 获取聊天信息的频道id
+# 频道id获取方式: 打开开发者模式（用户设置-高级设置-开发者模式）,右键点击想要聊天的频道，再点击复制频道ID
 text_channel_id = "聊天信息的频道id"
 
 # 需要自动聊天的频道id，同时刷多个服务器，可在列表中追加
@@ -42,8 +43,10 @@ ac_sleep_time_max = 20
 # 是否检测mod说话
 check_mod_flg = True
 
-# dc工会id，check_mod_flg=True时需要设置
-guild_id = "工会id"
+# dc服务器id，check_mod_flg=True时需要设置
+# 服务器id获取方式：打开开发者模式（用户设置-高级设置-开发者模式），右键点击想要聊天的服务器，再点击复制服务器ID
+guild_id = "服务器id"
 
 # mod角色列表（包括mod，管理员等），check_mod_flg=True时需要设置
+# mod角色ID获取方式：打开开发者模式（用户设置-高级设置-开发者模式），点击mod头像，右键点击该mod的mod身份组，点击复制身份组ID
 mod_role_id_list = ["role角色id"]
