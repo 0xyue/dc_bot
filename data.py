@@ -48,5 +48,5 @@ check_mod_flg = True
 guild_id = "服务器id"
 
 # mod角色列表（包括mod，管理员等），check_mod_flg=True时需要设置
-# mod角色ID获取方式：打开开发者模式（用户设置-高级设置-开发者模式），点击mod头像，右键点击该mod的mod身份组，点击复制身份组ID
+# mod角色ID获取方式：打开开发者模式（用户设置-高级设置-开发者模式），点击mod头像，右键点击该mod的mod身份组，点击复制身份组ID，如果有多个管理身份组，都复制添加到列表中
 mod_role_id_list = ["role角色id"]
